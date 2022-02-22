@@ -57,5 +57,20 @@
       let si = new SistemaImpressao();
       si.imprime(nomes);
     </script>
+    <script>
+        class Relogio {
+
+constructor() {
+    let self = this;
+    this._segundos = 0;
+
+    setInterval(function () {
+        console.log(++self._segundos);
+      }, 1000);
+}
+}
+
+var relogio = new Relogio();
+    </script>
   </body>
 </html>
