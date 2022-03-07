@@ -1,10 +1,9 @@
 class ListaNegociacoes {
     
-    constructor(contexto, armadilha) {
+    constructor(armadilha) {
         
         this._negociacoes = [];
         this._armadilha = armadilha;
-        this._contexto = contexto;
     }
     
     adiciona(negociacao) {
