@@ -14,6 +14,32 @@ class NegociacaoController {
         this._mensagem = new Mensagem();
         this._mensagemView = new MensagemView($('#mensagemView'));
         this._mensagemView.update(this._mensagem);
+
+        let self = this;
+
+        this._listaNegociacoes = new Proxy(new ListaNegociacoes(), {
+            
+            get(target, prop, receiver) {
+
+                // verifica se o array contém esses elementos
+                if (['adiciona', 'esvazia'].includes(prop) && typeof(target[prop]) == typeof(Function)) {
+
+                    return function() {
+
+                        console.log(`Interceptando ${prop}`);
+                        // arguments: dá acesso a todos os parâmetros da função
+                        Reflect.apply(target[prop], target, arguments);
+                        self._negociacoesView.update(target);
+                        console.log(self._negociacoesView.update(target))
+                    }
+
+                }
+
+                return Reflect.get(target, prop, receiver);
+            }
+        })
+
+        console.log(this._listaNegociacoes)
         
     }
     
